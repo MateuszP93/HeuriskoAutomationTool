@@ -41,6 +41,12 @@ class HeuriskoSession:
     def run_workflow(self, name: str, **params):
         return self.runner.run_workflow(name, params)
 
+    def click(self, locator_name: str):
+        return self.runner.click(locator_name)
+
+    def click_path(self, locator_names: list[str] | tuple[str, ...]):
+        return self.runner.click_path(locator_names)
+
     def run_queue(self, path: str | Path):
         return self.queue.run_yaml(Path(path))
 

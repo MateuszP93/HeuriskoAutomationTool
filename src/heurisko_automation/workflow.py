@@ -31,6 +31,13 @@ class WorkflowRunner:
 
         return context
 
+    def click(self, locator_name: str):
+        self._click_locator(locator_name)
+
+    def click_path(self, locator_names: list[str] | tuple[str, ...]):
+        for locator_name in locator_names:
+            self._click_locator(locator_name)
+
     def _load_workflow(self, name: str) -> dict[str, Any]:
         path = self.config.workflows_dir / f"{name}.yaml"
         workflow = read_yaml(path)
