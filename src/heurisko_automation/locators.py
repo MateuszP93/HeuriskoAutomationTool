@@ -11,8 +11,11 @@ class Locator:
     name: str
     window: str
     type: str
+    relative_to: str = "window"
     x: int | None = None
     y: int | None = None
+    before_delay: float | None = None
+    after_delay: float | None = None
     opens_window: str | None = None
 
 
@@ -23,8 +26,11 @@ class LocatorRegistry:
                 name=name,
                 window=str(definition.get("window", "main")),
                 type=str(definition.get("type", "coordinate")),
+                relative_to=str(definition.get("relative_to", "window")),
                 x=definition.get("x"),
                 y=definition.get("y"),
+                before_delay=definition.get("before_delay"),
+                after_delay=definition.get("after_delay"),
                 opens_window=definition.get("opens_window"),
             )
             for name, definition in definitions.items()

@@ -95,10 +95,32 @@ class AppController:
         if focused is None or int(focused.handle) != int(handle.handle):
             raise WindowFocusError(f"Window does not have focus: {window_name}")
 
-    def click_coordinate(self, window_name: str, x: int, y: int, focus: bool = True, delay: float | None = None):
-        handle = self.wait_window(window_name, focus=focus)
-        rect = handle.rectangle()
-        pyautogui.click(rect.left + int(x), rect.top + int(y))
+    def click_coordinate(
+        self,
+        window_name: str,
+        x: int,
+        y: int,
+        focus: bool = True,
+        delay: float | None = None,
+        relative_to: str = "window",
+        before_delay: float | None = None,
+    ):
+        if before_delay:
+            time.sleep(before_delay)
+
+        if relative_to == "screen":
+            click_x = int(x)
+            click_y = int(y)
+        elif relative_to == "window":
+            handle = self.wait_window(window_name, focus=focus)
+            rect = handle.rectangle()
+            click_x = rect.left + int(x)
+            click_y = rect.top + int(y)
+        else:
+            raise ValueError(f"Unsupported coordinate reference: {relative_to}")
+
+        pyautogui.moveTo(click_x, click_y, duration=0.05)
+        pyautogui.click(click_x, click_y)
         time.sleep(self.click_delay if delay is None else delay)
 
     def write(self, value: Any):

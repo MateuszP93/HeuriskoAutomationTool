@@ -39,7 +39,7 @@ class WorkflowRunner:
             self._click_locator(
                 locator_name,
                 focus=index == 0,
-                delay=self.app.path_click_delay,
+                delay=None,
             )
 
     def _load_workflow(self, name: str) -> dict[str, Any]:
@@ -89,7 +89,15 @@ class WorkflowRunner:
             raise WorkflowError(f"Unsupported locator type for {name}: {locator.type}")
         if locator.x is None or locator.y is None:
             raise WorkflowError(f"Coordinate locator {name} requires x and y")
-        self.app.click_coordinate(locator.window, locator.x, locator.y, focus=focus, delay=delay)
+        self.app.click_coordinate(
+            locator.window,
+            locator.x,
+            locator.y,
+            focus=focus,
+            delay=locator.after_delay if locator.after_delay is not None else delay,
+            relative_to=locator.relative_to,
+            before_delay=locator.before_delay,
+        )
 
         if locator.opens_window:
             self.windows.get(locator.opens_window).wait_until_ready()
