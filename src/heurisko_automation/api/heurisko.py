@@ -25,6 +25,9 @@ class HeuriskoApi:
     def click_path(self, locator_names: list[str] | tuple[str, ...]):
         return self.runner.click_path(locator_names)
 
+    def mouse_position(self) -> tuple[int, int]:
+        return self.runner.app.mouse_position()
+
     def run_queue(self, path: str | Path):
         return self.queue_runner.run_yaml(Path(path))
 

@@ -15,6 +15,8 @@ class Locator:
     x: int | None = None
     y: int | None = None
     before_delay: float | None = None
+    hover_delay: float | None = None
+    move_duration: float | None = None
     after_delay: float | None = None
     opens_window: str | None = None
 
@@ -30,6 +32,8 @@ class LocatorRegistry:
                 x=definition.get("x"),
                 y=definition.get("y"),
                 before_delay=definition.get("before_delay"),
+                hover_delay=definition.get("hover_delay"),
+                move_duration=definition.get("move_duration"),
                 after_delay=definition.get("after_delay"),
                 opens_window=definition.get("opens_window"),
             )

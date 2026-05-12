@@ -5,7 +5,9 @@ locators:
     relative_to: window
     x: 317
     y: 38
-    after_delay: 1.0
+    move_duration: 0.15
+    hover_delay: 0.15
+    after_delay: 1.5
 
   operators.acc:
     window: main
@@ -13,8 +15,10 @@ locators:
     relative_to: screen
     x: 317
     y: 965
-    before_delay: 0.2
-    after_delay: 0.8
+    before_delay: 0.8
+    move_duration: 0.2
+    hover_delay: 0.3
+    after_delay: 1.0
 
   operators.bb:
     window: main
@@ -22,8 +26,10 @@ locators:
     relative_to: screen
     x: 317
     y: 989
-    before_delay: 0.2
-    after_delay: 0.8
+    before_delay: 0.8
+    move_duration: 0.2
+    hover_delay: 0.3
+    after_delay: 1.0
 
   operators.acc.set_irradiance:
     window: main
@@ -31,8 +37,10 @@ locators:
     relative_to: screen
     x: 562
     y: 1031
-    before_delay: 0.2
-    after_delay: 0.8
+    before_delay: 0.8
+    move_duration: 0.2
+    hover_delay: 0.3
+    after_delay: 1.0
     opens_window: input_value
 
   operators.acc.get_irradiance:
@@ -41,5 +49,7 @@ locators:
     relative_to: screen
     x: 562
     y: 1055
-    before_delay: 0.2
-    after_delay: 0.8
+    before_delay: 0.8
+    move_duration: 0.2
+    hover_delay: 0.3
+    after_delay: 1.0

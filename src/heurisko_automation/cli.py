@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import code
+import time
 from pathlib import Path
 
 from heurisko_automation.config import load_config
@@ -15,6 +16,9 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     subparsers.add_parser("shell", help="Open live Python shell with 'heurisko' session object.")
+
+    mouse_parser = subparsers.add_parser("mouse-position", help="Print current mouse position after a delay.")
+    mouse_parser.add_argument("--delay", type=float, default=3.0)
 
     run_parser = subparsers.add_parser("run", help="Run one workflow.")
     run_parser.add_argument("workflow")
@@ -53,6 +57,14 @@ def main():
         print("Locators:")
         for name in session.locators.names():
             print(f"  - {name}")
+        return
+
+    if args.command == "mouse-position":
+        time.sleep(args.delay)
+        import pyautogui
+
+        position = pyautogui.position()
+        print(f"x={int(position.x)} y={int(position.y)}")
         return
 
     from heurisko_automation.session import create_session

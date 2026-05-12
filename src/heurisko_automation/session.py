@@ -50,6 +50,9 @@ class HeuriskoSession:
     def click_path(self, locator_names: list[str] | tuple[str, ...]):
         return self.runner.click_path(locator_names)
 
+    def mouse_position(self) -> tuple[int, int]:
+        return self.app.mouse_position()
+
     def run_queue(self, path: str | Path):
         return self.queue.run_yaml(Path(path))
 

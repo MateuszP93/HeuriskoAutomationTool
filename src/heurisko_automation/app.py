@@ -104,6 +104,8 @@ class AppController:
         delay: float | None = None,
         relative_to: str = "window",
         before_delay: float | None = None,
+        hover_delay: float | None = None,
+        move_duration: float | None = None,
     ):
         if before_delay:
             time.sleep(before_delay)
@@ -121,9 +123,15 @@ class AppController:
         else:
             raise ValueError(f"Unsupported coordinate reference: {relative_to}")
 
-        pyautogui.moveTo(click_x, click_y, duration=0.05)
+        pyautogui.moveTo(click_x, click_y, duration=0.05 if move_duration is None else move_duration)
+        if hover_delay:
+            time.sleep(hover_delay)
         pyautogui.click(click_x, click_y)
         time.sleep(self.click_delay if delay is None else delay)
+
+    def mouse_position(self) -> tuple[int, int]:
+        position = pyautogui.position()
+        return int(position.x), int(position.y)
 
     def write(self, value: Any):
         pyautogui.write(str(value), interval=self.typing_delay)

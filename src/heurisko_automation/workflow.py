@@ -100,6 +100,8 @@ class WorkflowRunner:
             delay=locator.after_delay if locator.after_delay is not None else delay,
             relative_to=locator.relative_to,
             before_delay=locator.before_delay,
+            hover_delay=locator.hover_delay,
+            move_duration=locator.move_duration,
         )
 
         if locator.opens_window:
