@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from heurisko_automation.api.acc import AccApi
+from heurisko_automation.api.locators import LocatorTree
 
 
 class HeuriskoApi:
@@ -10,6 +11,7 @@ class HeuriskoApi:
         self.runner = runner
         self.queue_runner = queue_runner
         self.acc = AccApi(runner)
+        self._locator_tree = LocatorTree(runner, runner.locators.names())
 
     def run_workflow(self, name: str, **params):
         return self.runner.run_workflow(name, params)
@@ -25,3 +27,9 @@ class HeuriskoApi:
 
     def run_excel(self, path: str | Path):
         return self.queue_runner.run_excel(Path(path))
+
+    def __getattr__(self, name: str):
+        return getattr(self._locator_tree, name)
+
+    def __dir__(self):
+        return sorted(set(super().__dir__()) | set(dir(self._locator_tree)))
