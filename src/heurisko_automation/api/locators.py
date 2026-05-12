@@ -19,6 +19,9 @@ class LocatorNode:
         return child
 
     def click(self):
+        return self.path()
+
+    def click_self(self):
         if self._full_name is None:
             raise AttributeError(f"Locator group cannot be clicked directly: {self._name}")
         return self._runner.click(self._full_name)
