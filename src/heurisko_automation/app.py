@@ -136,10 +136,17 @@ class AppController:
     def write(self, value: Any):
         pyautogui.write(str(value), interval=self.typing_delay)
         time.sleep(self.click_delay)
+        return self
 
     def hotkey(self, *keys: str):
         pyautogui.hotkey(*keys)
         time.sleep(self.click_delay)
+        return self
+
+    def press(self, key: str):
+        pyautogui.press(key)
+        time.sleep(self.click_delay)
+        return self
 
     def screenshot(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)

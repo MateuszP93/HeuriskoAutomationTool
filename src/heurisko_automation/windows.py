@@ -29,6 +29,19 @@ class ManagedWindow:
         self.app.write(value)
         return self
 
+    def press(self, key: str):
+        self.app.press(key)
+        return self
+
+    def hotkey(self, *keys: str):
+        self.app.hotkey(*keys)
+        return self
+
+    def clear(self):
+        self.hotkey("ctrl", "a")
+        self.press("backspace")
+        return self
+
 
 class WindowRegistry:
     def __init__(self, app, definitions: dict[str, Any]):

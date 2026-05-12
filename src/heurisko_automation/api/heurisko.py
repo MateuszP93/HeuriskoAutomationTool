@@ -28,6 +28,19 @@ class HeuriskoApi:
     def mouse_position(self) -> tuple[int, int]:
         return self.runner.app.mouse_position()
 
+    def write(self, value):
+        return self.runner.app.write(value)
+
+    def press(self, key: str):
+        return self.runner.app.press(key)
+
+    def hotkey(self, *keys: str):
+        return self.runner.app.hotkey(*keys)
+
+    def clear(self):
+        self.hotkey("ctrl", "a")
+        return self.press("backspace")
+
     def run_queue(self, path: str | Path):
         return self.queue_runner.run_yaml(Path(path))
 
