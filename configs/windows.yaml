@@ -1,0 +1,23 @@
+windows:
+  main:
+    title_regex: ".*heurisko Demo.*"
+    x: 0
+    y: 0
+    width: 1200
+    height: 800
+    require_focus: true
+    resize_on_connect: true
+
+  input_value:
+    title_regex: ".*Input.*"
+    timeout: 5
+    require_focus: true
+    locators:
+      value_field:
+        type: coordinate
+        x: 200
+        y: 120
+      ok_button:
+        type: coordinate
+        x: 200
+        y: 160

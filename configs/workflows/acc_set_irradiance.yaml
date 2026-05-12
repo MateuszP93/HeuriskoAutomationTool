@@ -1,0 +1,28 @@
+name: acc_set_irradiance
+
+steps:
+  - action: click_path
+    path:
+      - operators
+      - operators.acc
+      - operators.acc.set_irradiance
+
+  - action: wait_window
+    window: input_value
+    as: input
+
+  - action: click
+    window: input
+    target: value_field
+
+  - action: write
+    value_from: irradiance
+
+  - action: click
+    window: input
+    target: ok_button
+
+  - action: wait_done
+    run_id_from: run_id
+    timeout: 300
+    optional: true

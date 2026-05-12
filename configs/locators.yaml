@@ -1,0 +1,31 @@
+locators:
+  operators:
+    window: main
+    type: coordinate
+    x: 317
+    y: 38
+
+  operators.acc:
+    window: main
+    type: coordinate
+    x: 317
+    y: 965
+
+  operators.bb:
+    window: main
+    type: coordinate
+    x: 317
+    y: 989
+
+  operators.acc.set_irradiance:
+    window: main
+    type: coordinate
+    x: 562
+    y: 1031
+    opens_window: input_value
+
+  operators.acc.get_irradiance:
+    window: main
+    type: coordinate
+    x: 562
+    y: 1055

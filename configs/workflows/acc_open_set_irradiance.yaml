@@ -1,0 +1,12 @@
+name: acc_open_set_irradiance
+
+steps:
+  - action: click_path
+    path:
+      - operators
+      - operators.acc
+      - operators.acc.set_irradiance
+
+  - action: wait_window
+    window: input_value
+    as: input

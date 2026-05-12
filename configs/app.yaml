@@ -1,0 +1,12 @@
+app:
+  backend: win32
+  main_window: main
+  click_delay: 0.3
+  typing_delay: 0.02
+  screenshot_on_error: true
+
+status_monitor:
+  file: data/runtime/heurisko_status.txt
+  done_marker: "$$DONE$$"
+  poll_interval: 0.2
+  stable_delay: 0.3

@@ -1,0 +1,5 @@
+queue:
+  - run_id: acc_001
+    workflow: acc_set_irradiance
+    params:
+      irradiance: 20
