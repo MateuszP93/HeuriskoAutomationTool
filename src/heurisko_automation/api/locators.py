@@ -23,6 +23,11 @@ class LocatorNode:
             raise AttributeError(f"Locator group cannot be clicked directly: {self._name}")
         return self._runner.click(self._full_name)
 
+    def click_no_focus(self):
+        if self._full_name is None:
+            raise AttributeError(f"Locator group cannot be clicked directly: {self._name}")
+        return self._runner.click_no_focus(self._full_name)
+
     def path(self):
         names = []
         node = self

@@ -109,6 +109,8 @@ class AppController:
             time.sleep(before_delay)
 
         if relative_to == "screen":
+            if focus:
+                self.wait_window(window_name, focus=True)
             click_x = int(x)
             click_y = int(y)
         elif relative_to == "window":

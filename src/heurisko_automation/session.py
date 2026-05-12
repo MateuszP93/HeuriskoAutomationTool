@@ -44,6 +44,9 @@ class HeuriskoSession:
     def click(self, locator_name: str):
         return self.runner.click(locator_name)
 
+    def click_no_focus(self, locator_name: str):
+        return self.runner.click_no_focus(locator_name)
+
     def click_path(self, locator_names: list[str] | tuple[str, ...]):
         return self.runner.click_path(locator_names)
 

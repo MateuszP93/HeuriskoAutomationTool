@@ -34,6 +34,9 @@ class WorkflowRunner:
     def click(self, locator_name: str):
         self._click_locator(locator_name)
 
+    def click_no_focus(self, locator_name: str):
+        self._click_locator(locator_name, focus=False)
+
     def click_path(self, locator_names: list[str] | tuple[str, ...]):
         for index, locator_name in enumerate(locator_names):
             self._click_locator(
