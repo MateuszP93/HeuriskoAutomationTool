@@ -16,6 +16,12 @@ class HeuriskoApi:
     def run_workflow(self, name: str, **params):
         return self.runner.run_workflow(name, params)
 
+    def open_set_irradiance(self):
+        return self.acc.open_set_irradiance()
+
+    def open_set_irradiance_dialog(self):
+        return self.acc.open_set_irradiance()
+
     def click(self, locator_name: str):
         return self.runner.click(locator_name)
 
@@ -27,6 +33,12 @@ class HeuriskoApi:
 
     def mouse_position(self) -> tuple[int, int]:
         return self.runner.app.mouse_position()
+
+    def list_windows(self):
+        return self.runner.app.list_windows()
+
+    def wait_window(self, name: str, timeout: float | None = None):
+        return self.runner.windows.get(name).wait_until_ready(timeout=timeout)
 
     def write(self, value):
         return self.runner.app.write(value)

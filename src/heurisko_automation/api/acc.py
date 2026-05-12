@@ -9,6 +9,9 @@ class AccApi:
         context = self.runner.run_workflow("acc_open_set_irradiance", {"run_id": "manual_open"})
         return context.get("input")
 
+    def open_set_irradiance_dialog(self):
+        return self.open_set_irradiance()
+
     def set_irradiance(self, value, run_id: str | None = None, wait_done: bool = False):
         params = {
             "irradiance": value,

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import pyautogui
-from pywinauto import Application
+from pywinauto import Application, Desktop
 
 from heurisko_automation.errors import WindowFocusError, WindowNotFoundError
 
@@ -132,6 +132,28 @@ class AppController:
     def mouse_position(self) -> tuple[int, int]:
         position = pyautogui.position()
         return int(position.x), int(position.y)
+
+    def list_windows(self) -> list[dict[str, Any]]:
+        windows = []
+        for window in Desktop(backend=self.backend).windows():
+            try:
+                rect = window.rectangle()
+                title = window.window_text()
+                if not title:
+                    continue
+                windows.append(
+                    {
+                        "title": title,
+                        "handle": int(window.handle),
+                        "left": rect.left,
+                        "top": rect.top,
+                        "right": rect.right,
+                        "bottom": rect.bottom,
+                    }
+                )
+            except Exception:
+                continue
+        return windows
 
     def write(self, value: Any):
         pyautogui.write(str(value), interval=self.typing_delay)
