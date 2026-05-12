@@ -17,7 +17,7 @@ locators:
     y: 965
     before_delay: 0.8
     move_duration: 0.2
-    hover_delay: 0.3
+    hover_delay: 0.2
     after_delay: 1.0
 
   operators.bb:
@@ -28,7 +28,7 @@ locators:
     y: 989
     before_delay: 0.8
     move_duration: 0.2
-    hover_delay: 0.3
+    hover_delay: 0.2
     after_delay: 1.0
 
   operators.acc.set_irradiance:
@@ -39,7 +39,7 @@ locators:
     y: 1031
     before_delay: 0.8
     move_duration: 0.2
-    hover_delay: 0.3
+    hover_delay: 0.2
     after_delay: 1.0
     opens_window: input_value
 
@@ -51,5 +51,5 @@ locators:
     y: 1055
     before_delay: 0.8
     move_duration: 0.2
-    hover_delay: 0.3
+    hover_delay: 0.2
     after_delay: 1.0
