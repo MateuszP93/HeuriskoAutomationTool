@@ -2,6 +2,7 @@ app:
   backend: win32
   main_window: main
   click_delay: 0.3
+  path_click_delay: 0.5
   typing_delay: 0.02
   screenshot_on_error: true
 

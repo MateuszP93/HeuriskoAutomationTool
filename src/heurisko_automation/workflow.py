@@ -35,8 +35,12 @@ class WorkflowRunner:
         self._click_locator(locator_name)
 
     def click_path(self, locator_names: list[str] | tuple[str, ...]):
-        for locator_name in locator_names:
-            self._click_locator(locator_name)
+        for index, locator_name in enumerate(locator_names):
+            self._click_locator(
+                locator_name,
+                focus=index == 0,
+                delay=self.app.path_click_delay,
+            )
 
     def _load_workflow(self, name: str) -> dict[str, Any]:
         path = self.config.workflows_dir / f"{name}.yaml"
@@ -49,8 +53,7 @@ class WorkflowRunner:
         action = step["action"]
 
         if action == "click_path":
-            for locator_name in step["path"]:
-                self._click_locator(locator_name)
+            self.click_path(step["path"])
             return
 
         if action == "click":
@@ -80,13 +83,13 @@ class WorkflowRunner:
 
         raise WorkflowError(f"Unsupported action: {action}")
 
-    def _click_locator(self, name: str):
+    def _click_locator(self, name: str, focus: bool = True, delay: float | None = None):
         locator = self.locators.get(name)
         if locator.type != "coordinate":
             raise WorkflowError(f"Unsupported locator type for {name}: {locator.type}")
         if locator.x is None or locator.y is None:
             raise WorkflowError(f"Coordinate locator {name} requires x and y")
-        self.app.click_coordinate(locator.window, locator.x, locator.y)
+        self.app.click_coordinate(locator.window, locator.x, locator.y, focus=focus, delay=delay)
 
         if locator.opens_window:
             self.windows.get(locator.opens_window).wait_until_ready()

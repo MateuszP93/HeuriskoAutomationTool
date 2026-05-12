@@ -17,6 +17,7 @@ class AppController:
         self.windows = config.windows
         self.backend = self.app_settings.get("backend", "win32")
         self.click_delay = float(self.app_settings.get("click_delay", 0.2))
+        self.path_click_delay = float(self.app_settings.get("path_click_delay", self.click_delay))
         self.typing_delay = float(self.app_settings.get("typing_delay", 0.02))
         self.app: Application | None = None
         pyautogui.FAILSAFE = True
@@ -39,7 +40,7 @@ class AppController:
         definition = self.windows[name]
         return self.app.window(title_re=definition["title_regex"])
 
-    def wait_window(self, name: str, timeout: float | None = None):
+    def wait_window(self, name: str, timeout: float | None = None, focus: bool = True):
         if self.app is None:
             raise RuntimeError("Application is not connected. Call connect() first.")
 
@@ -53,10 +54,11 @@ class AppController:
             try:
                 handle = self.app.window(title_re=title_regex)
                 if handle.exists() and handle.is_visible() and handle.is_enabled():
-                    handle.set_focus()
-                    time.sleep(0.15)
-                    if definition.get("require_focus", True):
-                        self.ensure_focused(handle, name)
+                    if focus:
+                        handle.set_focus()
+                        time.sleep(0.15)
+                        if definition.get("require_focus", True):
+                            self.ensure_focused(handle, name)
                     return handle
             except Exception as exc:  # pywinauto raises several backend-specific exceptions here.
                 last_error = exc
@@ -93,11 +95,11 @@ class AppController:
         if focused is None or int(focused.handle) != int(handle.handle):
             raise WindowFocusError(f"Window does not have focus: {window_name}")
 
-    def click_coordinate(self, window_name: str, x: int, y: int):
-        handle = self.wait_window(window_name)
+    def click_coordinate(self, window_name: str, x: int, y: int, focus: bool = True, delay: float | None = None):
+        handle = self.wait_window(window_name, focus=focus)
         rect = handle.rectangle()
         pyautogui.click(rect.left + int(x), rect.top + int(y))
-        time.sleep(self.click_delay)
+        time.sleep(self.click_delay if delay is None else delay)
 
     def write(self, value: Any):
         pyautogui.write(str(value), interval=self.typing_delay)
